@@ -1,17 +1,17 @@
-# 📚 Wiki do Projeto
+# 📚 Project Wiki
 
-Bem-vindo à documentação técnica do projeto. Esta wiki serve como guia para desenvolvedores entenderem a arquitetura, padrões e processos de desenvolvimento utilizados neste template.
+Welcome to the technical documentation of the project. This wiki serves as a guide for developers to understand the architecture, patterns, and development processes used in this template.
 
-## 🗂️ Tópicos
+## 🗂️ Topics
 
-1.  [**Arquitetura Hexagonal**](architecture.md) - Entenda a estrutura de Portas e Adaptadores.
-2.  [**DDD (Domain-Driven Design)**](ddd.md) - Padrões de design de domínio aplicados.
-3.  [**Guia de Implementação de Features**](feature-implementation.md) - Passo a passo para adicionar novas funcionalidades.
-4.  [**Uso do Logger**](logger.md) - Como utilizar o sistema de logs centralizado.
-5.  [**Dependências Base**](dependencies.md) - Visão geral das tecnologias e bibliotecas principais.
-6.  [**Testes**](testing.md) - Como implementar e rodar testes unitários e E2E.
+1.  [**Hexagonal Architecture**](architecture.md) - Understand the Ports and Adapters structure.
+2.  [**DDD (Domain-Driven Design)**](ddd.md) - Applied domain design patterns.
+3.  [**Feature Implementation Guide**](feature-implementation.md) - Step-by-step to add new functionalities.
+4.  [**Using the Logger**](logger.md) - How to use the centralized logging system.
+5.  [**Base Dependencies**](dependencies.md) - Overview of core technologies and libraries.
+6.  [**Testing**](testing.md) - How to implement and run unit and E2E tests.
 
 ---
 
 > [!TIP]
-> Esta documentação é um recurso vivo. Sempre que houver mudanças significativas na arquitetura ou novos padrões forem estabelecidos, lembre-se de atualizar estes arquivos.
+> This documentation is a living resource. Whenever there are significant changes in architecture or new patterns established, remember to update these files.

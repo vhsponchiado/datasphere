@@ -1,34 +1,34 @@
 # 🧩 Domain-Driven Design (DDD)
 
-Utilizamos princípios de DDD para manter o código organizado e focado no problema de negócio.
+We use DDD principles to keep the code organized and focused on the business problem.
 
-## Conceitos Aplicados
+## Applied Concepts
 
-### 1. Entidades (Entities)
-Localizadas em `src/domain/entities`. São classes que representam objetos com identidade.
-Exemplo: [user.entity.ts](file:///home/vinicius/Documents/development/templates/api-template/src/domain/entities/user.entity.ts)
+### 1. Entities
+Located in `src/domain/entities`. These are classes that represent objects with an identity.
+Example: `user.entity.ts`
 
 ```typescript
 export class User {
     constructor(
         public readonly id: string,
-        // ... atributos
+        // ... attributes
     ) { }
 }
 ```
 
-### 2. Portas de Repositório (Repository Ports)
-Definimos **Interfaces** na camada de Aplicação que o Domínio/Aplicação utiliza para persistir dados, sem depender de um banco específico.
-Localizadas em: `src/application/ports/out/`
+### 2. Repository Ports
+We define **Interfaces** in the Application layer that the Domain/Application uses to persist data, without depending on a specific database.
+Located in: `src/application/ports/out/`
 
-### 3. Casos de Uso (Use Cases)
-Representam as intenções do usuário e ações que podem ser realizadas no sistema.
-Localizados em: `src/application/use-cases/`
+### 3. Use Cases
+Represent the user's intentions and actions that can be performed in the system.
+Located in: `src/application/use-cases/`
 
 ---
 
-## Por que usar DDD?
+## Why use DDD?
 
-- **Linguagem Ubíqua**: O código reflete os termos usados no negócio.
-- **Isolamento**: Mudanças técnicos (ex: trocar PostgreSQL por MongoDB) não afetam a lógica de negócio.
-- **Testabilidade**: É fácil testar regras de negócio sem precisar de um banco de dados real.
+- **Ubiquitous Language**: The code reflects the terms used in the business.
+- **Isolation**: Technical changes (e.g., swapping PostgreSQL for MongoDB) do not affect business logic.
+- **Testability**: It's easy to test business rules without needing a real database.

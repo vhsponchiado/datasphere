@@ -32,7 +32,6 @@ async function seed() {
             email: 'admin@lumio.com',
             password: hashedPassword,
             role: 'admin',
-            xp: 0,
         });
         console.log('✅ Admin user created');
     } else {

@@ -1,8 +1,8 @@
-# 🏗️ Arquitetura Hexagonal
+# 🏗️ Hexagonal Architecture
 
-Este projeto utiliza a **Arquitetura Hexagonal** (também conhecida como Ports and Adapters). O objetivo principal é isolar a lógica de negócio central (o "Coração" do sistema) de preocupações externas, como bancos de dados, APIs de terceiros ou frameworks web.
+This project utilizes **Hexagonal Architecture** (also known as Ports and Adapters). The main goal is to isolate the core business logic (the "Heart" of the system) from external concerns such as databases, third-party APIs, or web frameworks.
 
-## Estrutura de Camadas
+## Layer Structure
 
 ```mermaid
 graph TD
@@ -29,26 +29,26 @@ graph TD
     RepoAdapter -- implements --> PortOut
 ```
 
-### 1. Domain (Coração)
-Localizada em `src/domain`. Não possui dependências de nenhuma outra camada.
-- **Entities**: Objetos com identidade única (ex: `User`).
-- **Value Objects**: Objetos definidos por seus atributos, imutáveis.
-- **Errors**: Exceções específicas de negócio.
+### 1. Domain (Heart)
+Located in `src/domain`. It has no dependencies on any other layer.
+- **Entities**: Objects with a unique identity (e.g., `User`).
+- **Value Objects**: Objects defined by their attributes, immutable.
+- **Errors**: Specific business exceptions.
 
-### 2. Application (Orquestração)
-Localizada em `src/application`.
-- **Use Cases**: Contêm a lógica de orquestração para uma funcionalidade específica.
-- **Ports**: Interfaces que definem como a aplicação se comunica com o mundo exterior.
-    - **In**: Portas de entrada (interfaces para os Use Cases).
-    - **Out**: Portas de saída (interfaces para repositórios, serviços externos, etc).
+### 2. Application (Orchestration)
+Located in `src/application`.
+- **Use Cases**: Contain the orchestration logic for a specific functionality.
+- **Ports**: Interfaces that define how the application communicates with the outside world.
+    - **In**: Input ports (interfaces for Use Cases).
+    - **Out**: Output ports (interfaces for repositories, external services, etc.).
 
-### 3. Infrastructure (Detalhes)
-Localizada em `src/infrastructure`.
-- **Adapters**: Implementações concretas das **Output Ports** (ex: `DrizzleUserRepository` implementando `UserRepositoryPort`).
-- **Controllers**: Adaptadores de entrada que recebem requisições HTTP e chamam os Use Cases.
-- **Config**: Configurações de ambiente, variáveis, etc.
+### 3. Infrastructure (Details)
+Located in `src/infrastructure`.
+- **Adapters**: Concrete implementations of the **Output Ports** (e.g., `DrizzleUserRepository` implementing `UserRepositoryPort`).
+- **Controllers**: Input adapters that receive HTTP requests and call the Use Cases.
+- **Config**: Environment settings, variables, etc.
 
 ---
 
 > [!NOTE]
-> A regra de ouro é: as dependências sempre apontam para dentro. O Domínio não sabe nada sobre aplicação ou infraestrutura.
+> The golden rule is: dependencies always point inward. The Domain knows nothing about the application or infrastructure layers.

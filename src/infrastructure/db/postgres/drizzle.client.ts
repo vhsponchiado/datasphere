@@ -6,8 +6,8 @@ import { EnvService } from '@/infrastructure/config/env/env.service'
 import * as schema from './drizzle.schema'
 
 @Injectable()
-export class DrizzleClientAdapter implements OnModuleDestroy {
-  private readonly logger = new Logger(DrizzleClientAdapter.name)
+export class DrizzleClient implements OnModuleDestroy {
+  private readonly logger = new Logger(DrizzleClient.name)
   private readonly pool: Pool
   private readonly db: ReturnType<typeof drizzle>
 

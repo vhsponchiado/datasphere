@@ -5,12 +5,12 @@ import {
   Session,
   SessionRepositoryPort,
 } from '@/application/ports/out/postgres/session-repository.port';
-import { DrizzleClientAdapter } from '../drizzle-client-adapter';
-import { sessions } from '../drizzle.schema';
+import { DrizzleClient } from '../../../db/postgres/drizzle.client';
+import { sessions } from '../../../db/postgres/drizzle.schema';
 
 @Injectable()
 export class DrizzleSessionRepository extends SessionRepositoryPort {
-  constructor(private readonly drizzleClient: DrizzleClientAdapter) {
+  constructor(private readonly drizzleClient: DrizzleClient) {
     super();
   }
 

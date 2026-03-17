@@ -1,91 +1,105 @@
-# 🚀 API Template - NestJS + Hexagonal Architecture + DDD
+# 🌐 DataSphere API
 
-Este é um template de API robusto e escalável utilizando **NestJS**, estruturado com **Arquitetura Hexagonal** (Ports and Adapters) e princípios de **Domain-Driven Design (DDD)**.
+**DataSphere API** is a robust IoT management and analytics platform designed for educational purposes. It serves as the backbone for university projects involving real-time monitoring of industrial-like sensors (RPM, Temperature) and device control.
+
+Built with **NestJS**, **Hexagonal Architecture**, and **Domain-Driven Design (DDD)**, it demonstrates how to handle heterogeneous data sources (Postgres + Firebase) in a clean, scalable way.
 
 ---
 
-## 📖 Documentação (Wiki)
+## 🚀 Key Features
 
-Para uma compreensão aprofundada da estrutura, padrões e como estender este projeto, consulte nossa Wiki interna:
+- **Real-time Monitoring**: Integration with **Firebase Realtime Database** for sub-second latency in sensor updates.
+- **Relational Persistence**: PostgreSQL (via **Drizzle ORM**) for robust user management and session control.
+- **IoT-Specific Security**: `x-api-key` authentication tailored for low-power devices like ESP32/Arduino.
+- **Advanced Analytics**:
+    - Current device state tracking (`on`, `off`, `operating`).
+    - Cumulative duration calculation for operating hours.
+    - Historical data aggregation (24h trends and weekly state stats).
+- **Clean Architecture**: Strict separation of concerns using Ports and Adapters.
 
-- [**Estrutura de Arquitetura**](./wiki/architecture.md)
-- [**Padrões DDD**](./wiki/ddd.md)
-- [**Guia de Implementação de Features**](./wiki/feature-implementation.md)
-- [**Uso do Logger**](./wiki/logger.md)
-- [**Testes e Qualidade**](./wiki/testing.md)
+---
+
+## 🏗️ Technical Architecture
+
+The project follows a **Hexagonal Architecture** flow:
+
+```mermaid
+graph LR
+    ESP32[ESP32 Device] -- "x-api-key" --> API[DataSphere API]
+    API -- "Updates" --> Firebase[(Firebase RTDB)]
+    API -- "User Data" --> Postgres[(PostgreSQL)]
+    Client[Web Dashboard] -- "JWT" --> API
+    API -- "Analytics" --> Client
+```
+
+1.  **Domain**: Pure business logic (Entities like `DeviceData`, `User`).
+2.  **Application**: Orchestrates business logic via **Use Cases** (Ports).
+3.  **Infrastructure**: Concrete implementations (Adapters like `FirebaseKeyValueAdapter`, `DrizzleUserRepository`).
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Framework**: [NestJS](https://nestjs.com/)
-- **ORM**: [Drizzle ORM](https://orm.drizzle.team/)
-- **Banco de Dados**: PostgreSQL
-- **Validação**: Zod & Class-validator
-- **Autenticação**: Passport JWT
-- **Testes**: [Vitest](https://vitest.dev/)
-- **Documentação API**: Swagger (Scalar)
+- **Backend**: [NestJS](https://nestjs.com/)
+- **Infrastructure**:
+    - **PostgreSQL**: Relational data (Drizzle ORM).
+    - **Firebase**: Real-time sensor state and history.
+- **Security**: Passport JWT (Users) & ApiKeyGuard (IoT Devices).
+- **Testing**: [Vitest](https://vitest.dev/) for blazing fast unit and E2E tests.
+- **Docs**: Swagger/OpenAPI (Access via `/api/docs`).
 
 ---
 
-## 🚦 Começando
+## 🚦 Getting Started
 
-### Pré-requisitos
+### 1. Requirements
+- Node.js v20+
+- Yarn
+- Docker (for PostgreSQL)
+- A Firebase Project (Realtime Database enabled)
 
-- Node.js (v20+)
-- Docker & Docker Compose (para o banco de dados)
+### 2. Configuration
+Copy `.env.example` to `.env` and fill in your Firebase credentials:
+```env
+# IoT Security
+DEVICE_API_KEY=your_secret_esp32_key
 
-### Instalação
-
-```bash
-# Instalar dependências
-yarn install
-
-# Configurar variáveis de ambiente
-cp .env.example .env
+# Firebase Configuration
+FIREBASE_DATABASE_URL=https://your-project.firebaseio.com/
+# ... other firebase vars
 ```
 
-### Execução
-
+### 3. Execution
 ```bash
-# Rodar banco de dados via Docker
+# Start PostgreSQL
 docker-compose up -d db
 
-# Rodar em modo de desenvolvimento local
+# Install and start
+yarn install
 yarn start:dev
 ```
 
-### Docker (Full Containerization)
-
-Você também pode rodar a aplicação inteira em containers:
-
+### 4. IoT Interaction Example
+Devices can push data using a simple POST:
 ```bash
-# Rodar App + Banco de Dados
-docker-compose up --build
-```
-
-### Testes
-
-```bash
-# Rodar testes unitários
-yarn test
-
-# Rodar com cobertura
-yarn test:cov
+curl -X POST http://localhost:3000/devices/prototipo_01/data \
+  -H "x-api-key: your-key" \
+  -H "Content-Type: application/json" \
+  -d '{"rpm": 1200, "temperature": 75.5, "status": "operating"}'
 ```
 
 ---
 
-## 🏗️ Arquitetura em Resumo
+## 🧪 Verification & Testing
 
-O projeto é dividido em três camadas principais:
+The project includes intensive E2E tests that simulate up to 7 days of historical data:
 
-1.  **Domain**: Lógica de negócio pura (Entidades, Exceptions).
-2.  **Application**: Casos de uso e definições de portas (interfaces).
-3.  **Infrastructure**: Implementações concretas (Repositórios Drizzle, Controllers, Config).
+```bash
+# Run E2E Device Diagnostics
+yarn test test/e2e/device.e2e-spec.ts
+```
 
 ---
 
-## 🛡️ License
-
-Este projeto está sob a licença [MIT](LICENSE).
+## 🛡️ Educational Project
+Developed for college application and IoT prototyping. Feel free to use and adapt for your university projects!

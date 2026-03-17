@@ -9,21 +9,10 @@ export const users = pgTable('users', {
   email: text('email').notNull().unique(),
   avatarUrl: text('avatar_url'),
   role: userRoleEnum('role').notNull().default('user'),
-  xp: integer('xp').notNull().default(0),
   lastSeen: timestamp('last_seen'),
-
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
-
-export const userEvents = pgTable('user_events', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  userId: uuid('user_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
-  eventType: text('event_type').notNull(),
-  metadata: json('metadata').notNull(),
-  occurredAt: timestamp('occurred_at').defaultNow().notNull(),
-});
-
 
 export const pushSubscriptions = pgTable('push_subscriptions', {
   id: uuid('id').primaryKey().defaultRandom(),

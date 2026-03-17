@@ -1,10 +1,3 @@
-export interface RankingItem {
-    userId: string;
-    username: string;
-    totalXp: number;
-    avatarUrl: string | null;
-}
-
 export interface PaginatedUsers {
     users: User[];
     total: number;
@@ -20,10 +13,6 @@ export abstract class UserRepositoryPort {
     abstract update(id: string, data: UpdateUserDto): Promise<User>;
     abstract delete(id: string): Promise<void>;
     abstract updateLastSeen(id: string): Promise<void>;
-    abstract getWeeklyRanking(startOfWeek: Date, endOfWeek: Date): Promise<RankingItem[]>;
-    abstract getGeneralRanking(): Promise<RankingItem[]>;
-    abstract getUserRanking(userId: string): Promise<{ xp: number; position: number } | null>;
-    abstract incrementXp(userId: string, amount: number): Promise<void>;
 }
 
 export interface User {

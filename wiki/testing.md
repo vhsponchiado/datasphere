@@ -1,12 +1,12 @@
-# 🧪 Testes
+# 🧪 Testing
 
-A qualidade do código é garantida através de testes unitários e de integração utilizando o **Vitest**.
+Code quality is guaranteed through unit and integration tests using **Vitest**.
 
-## Testes Unitários
+## Unit Tests
 
-Localizados em `test/units`. Focam em testar a lógica de Use Cases e Adapters de forma isolada.
+Located in `test/units`. They focus on testing Use Case and Adapter logic in isolation.
 
-### Criando um Teste
+### Creating a Test
 
 ```typescript
 import { describe, it, expect, vi } from 'vitest';
@@ -20,17 +20,17 @@ describe('MyUseCase', () => {
 });
 ```
 
-## Testes E2E
+## E2E Tests
 
-Localizados em `test/e2e`. Testam o fluxo completo da aplicação, desde a requisição HTTP até a resposta final.
+Located in `test/e2e`. They test the full application flow, from HTTP request to final response.
 
-## Comandos de Teste
+## Test Commands
 
-- `yarn test`: Executa todos os testes.
-- `yarn test:watch`: Executa testes em modo observação.
-- `yarn test:cov`: Gera relatório de cobertura de código.
+- `yarn test`: Runs all tests.
+- `yarn test:watch`: Runs tests in watch mode.
+- `yarn test:cov`: Generates code coverage report.
 
 ---
 
 > [!IMPORTANT]
-> Todos os novos Use Cases devem obrigatoriamente conter testes unitários que cubram os principais cenários de sucesso e erro.
+> All new Use Cases must include unit tests covering the main success and error scenarios.

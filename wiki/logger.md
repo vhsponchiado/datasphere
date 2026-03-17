@@ -1,10 +1,10 @@
-# 📝 Uso do Logger
+# 📝 Using the Logger
 
-O projeto possui um serviço de log customizado (`AppLogger`) que padroniza a saída no terminal com cores e timestamps.
+The project features a custom log service (`AppLogger`) that standardizes terminal output with colors and timestamps.
 
-## Como Usar
+## How to Use
 
-O `AppLogger` pode ser injetado em qualquer serviço ou controller.
+The `AppLogger` can be injected into any service or controller.
 
 ```typescript
 import { AppLogger } from '@/infrastructure/logger/logger.service';
@@ -16,26 +16,26 @@ export class MyService {
     }
 
     doSomething() {
-        this.logger.log('Iniciando processo...');
+        this.logger.log('Starting process...');
         
         try {
             // ...
         } catch (error) {
-            this.logger.error('Erro ao processar:', error.stack);
+            this.logger.error('Error processing:', error.stack);
         }
     }
 }
 ```
 
-## Níveis de Log
+## Log Levels
 
-- `log()`: Informações gerais de fluxo (Verde).
-- `warn()`: Avisos que não interrompem o sistema (Amarelo).
-- `error()`: Erros críticos ou exceções (Vermelho).
-- `debug()`: Informações detalhadas para desenvolvimento (Azul).
-- `verbose()`: Logs extremamente detalhados (Magenta).
+- `log()`: General flow information (Green).
+- `warn()`: Warnings that do not interrupt the system (Yellow).
+- `error()`: Critical errors or exceptions (Red).
+- `debug()`: Detailed information for development (Blue).
+- `verbose()`: Extremely detailed logs (Magenta).
 
 ---
 
 > [!TIP]
-> Sempre use `setContext()` no construtor para que os logs identifiquem a origem da mensagem, facilitando o debug.
+> Always use `setContext()` in the constructor so that logs identify the message source, facilitating debugging.

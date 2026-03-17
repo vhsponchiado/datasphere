@@ -26,8 +26,8 @@ async function bootstrap() {
   );
 
   const config = new DocumentBuilder()
-    .setTitle('API Template')
-    .setDescription('Standard API Template with NestJS, Drizzle ORM, and Scalar Documentation')
+    .setTitle('DataSphere API')
+    .setDescription('DataSphere API')
     .setVersion('1.0')
     .addTag('auth', 'Authentication and Authorization endpoints')
     .addTag('system', 'System health and status endpoints')
@@ -36,8 +36,8 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
 
-  const docsUsername = process.env.DOCS_USERNAME || 'your-username';
-  const docsPassword = process.env.DOCS_PASSWORD || 'your-password';
+  const docsUsername = process.env.DOCS_USERNAME || 'admin';
+  const docsPassword = process.env.DOCS_PASSWORD || 'admin';
 
   app.use(
     ['/api/docs'],

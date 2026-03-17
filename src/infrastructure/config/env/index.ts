@@ -25,6 +25,17 @@ export const envSchema = z
     JWT_REFRESH_SECRET: z.string().min(1, "JWT_REFRESH_SECRET é obrigatório"),
     JWT_EXPIRES_IN: z.string().default("15m"),
     JWT_REFRESH_EXPIRES_IN: z.string().default("7d"),
+
+    FIREBASE_API_KEY: z.string().default("AIzaSyA_placeholder"),
+    FIREBASE_AUTH_DOMAIN: z.string().default("placeholder.firebaseapp.com"),
+    FIREBASE_PROJECT_ID: z.string().default("placeholder-id"),
+    FIREBASE_STORAGE_BUCKET: z.string().default("placeholder.appspot.com"),
+    FIREBASE_MESSAGING_SENDER_ID: z.string().default("1234567890"),
+    FIREBASE_APP_ID: z.string().default("1:1234567890:web:placeholder"),
+    FIREBASE_MEASUREMENT_ID: z.string().default("G-placeholder"),
+    FIREBASE_DATABASE_URL: z.string().default("https://placeholder.firebaseio.com"),
+
+    DEVICE_API_KEY: z.string().default("datasphere-dev-key"),
   });
 
 export type Env = z.infer<typeof envSchema>;

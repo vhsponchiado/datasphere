@@ -1,12 +1,12 @@
-# 🚀 Implementando Nova Feature
+# 🚀 Implementing a New Feature
 
-Para adicionar uma nova funcionalidade ao sistema seguindo os padrões estabelecidos, siga estes passos:
+To add a new feature to the system following the established patterns, follow these steps:
 
-## 1. Definir o Domínio
-Se necessário, crie ou atualize as entidades em `src/domain/entities`.
+## 1. Define the Domain
+If necessary, create or update entities in `src/domain/entities`.
 
-## 2. Criar a Porta de Saída (Contrato)
-Se precisar de persistência, defina o contrato do repositório em `src/application/ports/out/`.
+## 2. Create the Output Port (Contract)
+If persistence is needed, define the repository contract in `src/application/ports/out/`.
 
 ```typescript
 export abstract class NewFeatureRepositoryPort {
@@ -14,29 +14,29 @@ export abstract class NewFeatureRepositoryPort {
 }
 ```
 
-## 3. Criar o Caso de Uso
-Implemente a lógica de negócio em `src/application/use-cases/`.
+## 3. Create the Use Case
+Implement the business logic in `src/application/use-cases/`.
 
 ```typescript
 @Injectable()
 export class ProcessDataUseCase {
     constructor(private readonly repo: NewFeatureRepositoryPort) {}
     async execute(input: any) {
-        // lógica
+        // logic
     }
 }
 ```
 
-## 4. Implementar o Adaptador de Infraestrutura
-Crie a implementação concreta do repositório em `src/infrastructure/db/postgres/repositories/` usando Drizzle.
+## 4. Implement the Infrastructure Adapter
+Create the concrete implementation of the repository in `src/infrastructure/adapters/postgres/repositories/` using Drizzle.
 
-## 5. Criar o Controller
-Exponha a funcionalidade via API em `src/infrastructure/controllers/`.
+## 5. Create the Controller
+Expose the functionality via API in `src/infrastructure/controllers/`.
 
-## 6. Registrar no Módulo
-Adicione o novo Use Case e Adaptador no `use-case.module.ts` e no módulo de banco de dados correspondente.
+## 6. Register in the Module
+Add the new Use Case and Adapter in the corresponding module (e.g., `DeviceModule`, `UserModule`).
 
 ---
 
 > [!IMPORTANT]
-> Lembre-se sempre de criar testes unitários para o novo Caso de Uso.
+> Always remember to create unit tests for the new Use Case.
