@@ -28,17 +28,36 @@ describe('DeviceController (e2e)', () => {
         const now = new Date();
         const promises: any[] = [];
         // Simulate 7 days (168 hours)
+        // Simulate 7 days (168 hours)
         for (let i = 168; i >= 0; i--) {
             const createdAt = new Date(now.getTime() - i * 60 * 60 * 1000).toISOString();
+            const dayOffset = Math.floor(i / 24);
+            const hourOfDay = i % 24;
 
-            // Cycle status every 3 hours
-            let status: 'on' | 'off' | 'operating' = 'on';
-            if (i % 3 === 1) status = 'operating';
-            if (i % 3 === 2) status = 'off';
+            // Varied status logic based on day of week
+            let status: 'on' | 'off' | 'operating' = 'operating';
+            
+            // Weekends (assuming day 5 and 6 are Saturday/Sunday)
+            if (dayOffset % 7 === 0 || dayOffset % 7 === 1) { // Sunday/Monday for variety
+                 if (hourOfDay < 20) status = 'off';
+                 else if (hourOfDay < 22) status = 'on';
+            } else if (dayOffset % 7 === 3) { // Wednesday "half day"
+                 if (hourOfDay < 12) status = 'off';
+                 else if (hourOfDay < 14) status = 'on';
+            } else { // Normal work days
+                 if (hourOfDay < 4) status = 'off';
+                 else if (hourOfDay < 6) status = 'on';
+            }
+
+            const timeScale = (i * Math.PI) / 12; 
+            // Add a bit of phase shift per day for "offset" waves
+            const phaseShift = dayOffset * 0.5;
+            const baseRpm = 50 + 35 * Math.sin(timeScale + phaseShift);
+            const baseTemp = 40 + 15 * Math.sin(timeScale + phaseShift);
 
             const payload = {
-                rpm: status === 'off' ? 0 : 1000 + Math.random() * 500,
-                temperature: status === 'off' ? 25 : 60 + Math.random() * 20,
+                rpm: status === 'off' ? 0 : Math.min(100, Math.max(0, baseRpm + Math.random() * 8)),
+                temperature: status === 'off' ? 20 + Math.random() * 2 : baseTemp + Math.random() * 5,
                 status,
                 createdAt,
             };

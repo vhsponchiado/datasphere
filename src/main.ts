@@ -60,6 +60,6 @@ async function bootstrap() {
     } as any),
   );
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 4040);
 }
 bootstrap();
